@@ -1,0 +1,53 @@
+
+import SectionHeader from "@/components/ui/common/section-header";
+import { ArrowUpRightIcon, StarIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import ProductCard from "@/components/ui/products/product-card";
+
+const featuredProducts = [
+  {
+    id: 1,
+    name: "AI-Powered Task Manager",
+    description:
+      "An intelligent task management app that uses AI to prioritize and organize your to-do list.",
+    tags: ["AI", "Productivity", "Task Management"],
+    voteCount: 120,
+    isFeatured: true,
+  },
+  {
+    id: 2,
+    name: "SaaS Analytics Dashboard",
+    description:
+      "A comprehensive analytics dashboard for managing and visualizing your SaaS metrics and performance data.",
+    tags: ["SaaS", "Analytics", "Dashboard"],
+    voteCount: 95,
+    isFeatured: false,
+  }
+];  
+
+export default async function FeaturedProducts() {
+  return (
+    <section className="py-20 bg-muted/20">
+      <div className="wrapper">
+        <div className="flex items-center justify-between mb-8">
+          <SectionHeader
+            title="Featured Today"
+            icon={StarIcon}
+            description="Top picks from our community this week"
+          />
+          <Button variant="outline" asChild className="hidden sm:flex">
+            <Link href="/explore">
+              View All <ArrowUpRightIcon className="size-4" />
+            </Link>
+          </Button>
+        </div>
+        <div className="grid-wrapper">
+          {featuredProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
