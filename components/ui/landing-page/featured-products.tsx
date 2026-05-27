@@ -4,29 +4,11 @@ import { ArrowUpRightIcon, StarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ProductCard from "@/components/ui/products/product-card";
-
-const featuredProducts = [
-  {
-    id: 1,
-    name: "AI-Powered Task Manager",
-    description:
-      "An intelligent task management app that uses AI to prioritize and organize your to-do list.",
-    tags: ["AI", "Productivity", "Task Management"],
-    voteCount: 120,
-    isFeatured: true,
-  },
-  {
-    id: 2,
-    name: "SaaS Analytics Dashboard",
-    description:
-      "A comprehensive analytics dashboard for managing and visualizing your SaaS metrics and performance data.",
-    tags: ["SaaS", "Analytics", "Dashboard"],
-    voteCount: 95,
-    isFeatured: false,
-  }
-];  
+import getFeaturedProducts from "@/lib/products/product-select";
 
 export default async function FeaturedProducts() {
+  const featuredProducts = await getFeaturedProducts();
+
   return (
     <section className="py-20 bg-muted/20">
       <div className="wrapper">

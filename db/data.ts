@@ -133,6 +133,6 @@ export const allProducts = [
     approvedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
     status: "pending" as const,
     submittedBy: "kulkarni.ankita09@gmail.com",
-    voteCount: 340,
+    voteCount: 341,
   },
 ];

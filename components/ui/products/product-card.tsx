@@ -9,15 +9,10 @@ import { StarIcon } from "lucide-react";
 import Link from "next/link";
 import {Badge} from "@/components/ui/badge";
 import { isWebpackDefaultLayer } from "next/dist/build/utils";
+import { InferSelectModel } from "drizzle-orm";
+import { products } from "@/db/schema";
 
-interface ProductType {
-  id: number;
-  name: string;
-  description: string;
-  tags: string[];
-  voteCount: number;
-  isFeatured: boolean;
-}
+type ProductType = InferSelectModel<typeof products>;
 
 export default function ProductCard({ product }: { product: ProductType }) {
   const hasVoted = false;
@@ -40,8 +35,7 @@ export default function ProductCard({ product }: { product: ProductType }) {
               </div>
               <CardDescription>{product.description}</CardDescription>
             </div>
-            {/* * Voting buttons
-            <VotingButtons
+            {/* <VotingButtons
               hasVoted={hasVoted}
               voteCount={product.voteCount}
               productId={product.id}
