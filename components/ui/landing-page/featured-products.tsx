@@ -4,7 +4,7 @@ import { ArrowUpRightIcon, StarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ProductCard from "@/components/ui/products/product-card";
-import getFeaturedProducts from "@/lib/products/product-select";
+import { getFeaturedProducts } from "@/lib/products/product-select";
 
 export default async function FeaturedProducts() {
   const featuredProducts = await getFeaturedProducts();
