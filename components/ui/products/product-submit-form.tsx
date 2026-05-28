@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Field, FieldLabel, FieldError, FieldDescription } from "@/components/ui/field";
+import { addProductAction } from "@/lib/products/product-actions";
 
 // import { addProductAction } from "@/lib/products/product-actions";
 import { cn } from "@/lib/utils";
@@ -36,8 +37,12 @@ export default function ProductSubmitForm() {
             tags: "",
         }
     })
+    const OnSubmit = async (data: z.infer<typeof formSchema>) => {
+        await addProductAction(data)
+    }
+    
     return (
-        <form>
+        <form onSubmit={form.handleSubmit(OnSubmit)} className="space-y-6">
             <Controller
                 name="name"
                 control={form.control}
