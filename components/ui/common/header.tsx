@@ -45,21 +45,29 @@ export default function Header() {
             </Link>
           </nav>
           <div className="flex items-center gap-3">
-            <Show when="signed-out">
-              <SignInButton>
-                <Button variant="secondary">
-                  Sign In
+            <Suspense fallback={<LoaderIcon className="size-5 animate-spin" />}>
+              <Show when="signed-out">
+                <SignInButton>
+                  <Button variant="secondary">
+                    Sign In
+                  </Button>
+                </SignInButton>
+                <SignUpButton>
+                  <Button>
+                    Sign Up
+                  </Button>
+                </SignUpButton>
+              </Show>
+              <Show when="signed-in">
+                <Button asChild>
+                  <Link href="/submit">
+                    <SparklesIcon className="size-4" />
+                    Submit Project
+                  </Link>
                 </Button>
-              </SignInButton>
-              <SignUpButton>
-                <Button>
-                  Sign Up
-                </Button>
-              </SignUpButton>
-            </Show>
-            <Show when="signed-in">
-              <UserButton />
-            </Show>
+                <UserButton />
+              </Show>
+            </Suspense>
           </div>
         </div>
       </div>
