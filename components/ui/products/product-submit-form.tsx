@@ -11,22 +11,14 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Field, FieldLabel, FieldError, FieldDescription } from "@/components/ui/field";
 import { addProductAction } from "@/lib/products/product-actions";
-
-// import { addProductAction } from "@/lib/products/product-actions";
 import { cn } from "@/lib/utils";
-
-// 1. Zod Schema
-const formSchema = z.object({
-    name: z.string().min(2, "Product name must be at least 2 characters long"),
-    slug: z.string().min(2, "Slug must be at least 2 characters long").regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug must be URL-friendly (lowercase letters, numbers, and hyphens only)"),
-    tagline: z.string().min(5, "tagline is required and must be at least 5 characters long").max(100, "tagline must be less than 100 characters long"),
-    description: z.string().min(10, "Description must be at least 10 characters long").max(1000, "Description must be less than 1000 characters long"),
-    websiteUrl: z.string().url("Must be a valid URL"),
-    tags: z.string().min(1, "At least one tag is required"),
-})
+import { formSchema, type ProductFormValues } from "@/lib/products/product-validations";
 
 export default function ProductSubmitForm() {
-    const form = useForm<z.infer<typeof formSchema>>({
+    const [isPending, startTransition] = useTransition();
+    const [submitState, setSubmitState] = useState<{ success: boolean; message: string } | null>(null);
+
+    const form = useForm<ProductFormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: "",
@@ -37,12 +29,19 @@ export default function ProductSubmitForm() {
             tags: "",
         }
     })
-    const OnSubmit = async (data: z.infer<typeof formSchema>) => {
-        await addProductAction(data)
+    function onSubmit(values: ProductFormValues) {
+        setSubmitState(null);
+        startTransition(async () => {
+            const result = await addProductAction(values);
+            setSubmitState({ success: result.success, message: result.message });
+            if (result.success) {
+                form.reset();
+            }
+        });
     }
-    
+
     return (
-        <form onSubmit={form.handleSubmit(OnSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <Controller
                 name="name"
                 control={form.control}
@@ -157,8 +156,13 @@ export default function ProductSubmitForm() {
                 )}
             />
 
-            <Button type="submit" size="lg" className="w-full">
-                Submit Product
+            <Button type="submit" size="lg" className="w-full" disabled={isPending}>
+                {isPending ? (
+                    <Loader2Icon className="size-4 animate-spin mr-2" />
+                ) : (
+                    <SparklesIcon className="size-4 mr-2" />
+                )}
+                {isPending ? "Submitting..." : "Submit Product"}
             </Button>
         </form>
     );
