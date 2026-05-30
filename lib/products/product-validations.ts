@@ -1,18 +1,27 @@
-import * as z from "zod";
+import { z } from "zod";
 
 export const formSchema = z.object({
-  name: z.string().min(2, "Product name must be at least 2 characters long"),
-  slug: z.string()
-    .min(2, "Slug must be at least 2 characters long")
-    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug must be URL-friendly (lowercase letters, numbers, and hyphens only)"),
-  tagline: z.string()
-    .min(5, "Tagline is required and must be at least 5 characters long")
-    .max(100, "Tagline must be less than 100 characters long"),
-  description: z.string()
-    .min(10, "Description must be at least 10 characters long")
-    .max(1000, "Description must be less than 1000 characters long"),
-  websiteUrl: z.string().url("Must be a valid URL"),
-  tags: z.string().min(1, "At least one tag is required"),
+  name: z
+    .string()
+    .min(3, { message: "Name must be at least 3 characters" })
+    .max(120, { message: "Name must be less than 120 characters" }),
+  slug: z
+    .string()
+    .min(3, { message: "Slug must be at least 3 characters" })
+    .max(140, { message: "Slug must be less than 140 characters" })
+    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
+      message:
+        "Slug must be lowercase and contain only letters and numbers and hyphens",
+    }),
+  tagline: z
+    .string()
+    .max(200, { message: "Tagline must be less than 200 characters" }),
+  description: z.string().optional(),
+  websiteUrl: z.string().min(1, { message: "Website URL is required" }),
+  tags: z
+    .string()
+    .min(1, { message: "Tags are required" })
+    .transform((val) => val.split(",").map((tag) => tag.trim().toLowerCase())),
 });
 
 export type ProductFormValues = z.infer<typeof formSchema>;
