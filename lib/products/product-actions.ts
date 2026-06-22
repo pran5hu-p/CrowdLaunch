@@ -31,6 +31,12 @@ export const addProductAction = async (data: ProductFormValues) => {
     }
 
     const { name, slug, tagline, description, websiteUrl, tags } = validatedData.data;
+    
+    const tagsArray = tags
+      .split(",")
+      .map((tag) => tag.trim().toLowerCase())
+      .filter(Boolean);
+
 
     await db.insert(products).values({
       name,
@@ -38,7 +44,7 @@ export const addProductAction = async (data: ProductFormValues) => {
       tagline,
       description,
       websiteUrl,
-      tags,
+      tags: tagsArray,
       status: "pending",
       submittedBy: userEmail,
       organizationId: orgId,

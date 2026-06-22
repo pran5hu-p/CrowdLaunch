@@ -18,10 +18,7 @@ export const formSchema = z.object({
     .max(200, { message: "Tagline must be less than 200 characters" }),
   description: z.string().optional(),
   websiteUrl: z.string().min(1, { message: "Website URL is required" }),
-  tags: z
-    .string()
-    .min(1, { message: "Tags are required" })
-    .transform((val) => val.split(",").map((tag) => tag.trim().toLowerCase())),
+  tags: z.string().min(1, { message: "Tags are required" }),
 });
 
 export type ProductFormValues = z.infer<typeof formSchema>;
