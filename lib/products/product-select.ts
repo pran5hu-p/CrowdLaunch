@@ -26,3 +26,13 @@ export async function getRecentProducts() {
     
     return recentProducts
 }
+
+export async function getProductBySlug(slug: string) {
+  const product = await db
+    .select()
+    .from(products)
+    .where(eq(products.slug, slug))
+    .limit(1);
+
+  return product?.[0] ?? null;
+}

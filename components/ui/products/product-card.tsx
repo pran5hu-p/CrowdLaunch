@@ -11,13 +11,14 @@ import {Badge} from "@/components/ui/badge";
 import { isWebpackDefaultLayer } from "next/dist/build/utils";
 import { InferSelectModel } from "drizzle-orm";
 import { products } from "@/db/schema";
+import VotingButtons from "@/components/ui/products/voting-buttons";
 
 type ProductType = InferSelectModel<typeof products>;
 
 export default function ProductCard({ product }: { product: ProductType }) {
   const hasVoted = false;
   return (
-    <Link href={`/products/${product.id}`}>
+    <Link href={`/products/${product.slug}`}>
       <Card className="group card-hover hover:bg-primary-foreground/10 border-solid border-gray-400 min-h-[200px]">
         <CardHeader className="flex-1">
           <div className="flex items-start gap-4">
@@ -35,11 +36,11 @@ export default function ProductCard({ product }: { product: ProductType }) {
               </div>
               <CardDescription>{product.description}</CardDescription>
             </div>
-            {/* <VotingButtons
+            <VotingButtons
               hasVoted={hasVoted}
               voteCount={product.voteCount}
               productId={product.id}
-            /> */}
+            />
           </div>
         </CardHeader>
         <CardFooter>
