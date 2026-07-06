@@ -36,3 +36,12 @@ export async function getProductBySlug(slug: string) {
 
   return product?.[0] ?? null;
 }
+
+export async function getAdminProducts() {
+    const productsData = await db
+        .select()
+        .from(products)
+        .orderBy(desc(products.createdAt)); // Sorting by newest is usually best for admin!
+    
+    return productsData;
+}
