@@ -104,6 +104,7 @@ export const upvoteProductAction = async (productId: number) => {
     revalidatePath("/");
     // Refreshes the individual product page cache
     revalidatePath("/products/[slug]", "page"); 
+    revalidatePath("/explore"); 
 
     return {
       success: true,
@@ -150,6 +151,8 @@ export const downvoteProductAction = async (productId: number) => {
     revalidatePath("/");
     // Refreshes the individual product page cache
     revalidatePath("/products/[slug]", "page"); 
+    // Refreshes the explore page cache
+    revalidatePath("/explore");
 
     return {
       success: true,
