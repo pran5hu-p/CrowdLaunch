@@ -1,21 +1,6 @@
 <p align="center">
   <h1 align="center">CrowdLaunch</h1>
   <p align="center">Empowering seamless, community-driven project launches and collaborative innovation.</p>
-  <p align="center">
-    <a href="https://github.com/CrowdLaunch/CrowdLaunch/actions/workflows/build.yml">
-      <img src="https://img.shields.io/github/actions/workflow/status/CrowdLaunch/CrowdLaunch/build.yml?branch=main&label=build&logo=github&style=flat-square" alt="Build Status">
-    </a>
-    <a href="https://github.com/CrowdLaunch/CrowdLaunch/blob/main/LICENSE">
-      <img src="https://img.shields.io/github/license/CrowdLaunch/CrowdLaunch.svg?style=flat-square" alt="License">
-    </a>
-    <a href="https://github.com/CrowdLaunch/CrowdLaunch/pulls">
-      <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=flat-square" alt="Pull Requests Welcome">
-    </a>
-    <a href="https://github.com/CrowdLaunch/CrowdLaunch/stargazers">
-      <img src="https://img.shields.io/github/stars/CrowdLaunch/CrowdLaunch.svg?style=flat-square" alt="Stars">
-    </a>
-  </p>
-</p>
 
 ---
 
@@ -173,13 +158,3 @@ We appreciate your efforts in making CrowdLaunch better!
 ### License
 
 This project is open-sourced under the **MIT License**.
-
-The MIT License is a permissive free software license, meaning you are free to:
-*   **Use**: Employ the software for any purpose.
-*   **Modify**: Change the software to suit your needs.
-*   **Distribute**: Share copies of the software.
-*   **Sublicense**: Grant others the right to use, modify, and distribute the software.
-
-Under the terms of the MIT License, the software is provided "as is", without warranty of any kind, express or implied. The only requirement is that the copyright notice and this permission notice be included in all copies or substantial portions of the software.
-
-For the full text of the license, please refer to the `LICENSE` file in the repository root (or assume it's implied if not explicitly present in the manifest).
